@@ -71,7 +71,7 @@ Aspiring software developer seeking to leverage my Business & Information System
 
 ## Certifications
 
-- NMLS (Nationwide Mortgage Licensing System) Certification
+- NMLS (Nationwide Mortgage Licensing System) Certification ID#2337521
 
 ## Professional Development
 
