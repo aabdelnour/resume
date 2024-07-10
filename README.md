@@ -3,9 +3,9 @@
 42 Meinzer St, Avenel, NJ 07001  
 (201) 844-5518 • kafraym@gmail.com
 
-[LinkedIn](https://www.linkedin.com/in/afraym-abdelnour-92b630197/)
-[GitHub](https://github.com/aabdelnour)
-**Website:**[https://aabdelnour.github.io/resume/](https://aabdelnour.github.io/resume/)
+- [LinkedIn](https://www.linkedin.com/in/afraym-abdelnour-92b630197/)
+- [GitHub](https://github.com/aabdelnour)
+- [Website](https://aabdelnour.github.io/resume/)
 
 ## Objective
 Aspiring software developer seeking to leverage my Business & Information Systems education and diverse professional experience to contribute to innovative software solutions and drive business growth.
