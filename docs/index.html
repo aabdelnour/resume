@@ -3,88 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Website</title>
+    <title>Your Professional Resume</title>
     <script src="https://kit.fontawesome.com/6012395552.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
             color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
         header {
-            background-color: #4a4a4a;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-        }
-        nav {
-            background-color: #333;
-            padding: 0.5rem;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1em;
-        }
-        main {
+            background-color: #35424a;
+            color: #ffffff;
             padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #4a4a4a;
-            color: #fff;
             text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        }
+        h1, h2, h3 {
+            color: #35424a;
+        }
+        .section {
+            background-color: #ffffff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .icon {
-            margin-right: 5px;
-            color: #ff6b6b;
+            color: #e8491d;
+            margin-right: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #e8491d;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1><i class="fa fa-rocket icon"></i> Welcome to My Awesome Website</h1>
+        <h1><i class="fas fa-user-tie icon"></i> Your Name</h1>
+        <p>Professional Resume</p>
     </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#"><i class="fa fa-home icon"></i> Home</a></li>
-            <li><a href="#"><i class="fa fa-user icon"></i> About</a></li>
-            <li><a href="#"><i class="fa fa-envelope icon"></i> Contact</a></li>
-        </ul>
-    </nav>
-    
-    <main>
-        <h2><i class="fa fa-star icon"></i> Main Content</h2>
-        <p>This is where your main content goes. You can add more sections, images, and other elements to make your website more engaging.</p>
-        <p><i class="fa fa-check icon"></i> Feature 1: Lorem ipsum dolor sit amet.</p>
-        <p><i class="fa fa-check icon"></i> Feature 2: Consectetur adipiscing elit.</p>
-        <p><i class="fa fa-check icon"></i> Feature 3: Sed do eiusmod tempor incididunt.</p>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 My Awesome Website. All rights reserved. <i class="fa fa-heart icon"></i></p>
-    </footer>
+
+    <div id="resume-content"></div>
+
+    <script>
+        fetch('../README.md')
+            .then(response => response.text())
+            .then(text => {
+                const html = marked.parse(text);
+                const content = document.getElementById('resume-content');
+                content.innerHTML = html;
+
+                // Add icons to sections
+                const headers = content.querySelectorAll('h2');
+                headers.forEach(header => {
+                    const section = document.createElement('div');
+                    section.className = 'section';
+                    header.parentNode.insertBefore(section, header);
+                    section.appendChild(header);
+
+                    let nextElement = section.nextSibling;
+                    while (nextElement && nextElement.nodeName !== 'H2') {
+                        const currentElement = nextElement;
+                        nextElement = nextElement.nextSibling;
+                        section.appendChild(currentElement);
+                    }
+
+                    let icon = 'fa-star';
+                    if (header.textContent.toLowerCase().includes('education')) icon = 'fa-graduation-cap';
+                    if (header.textContent.toLowerCase().includes('experience')) icon = 'fa-briefcase';
+                    if (header.textContent.toLowerCase().includes('skills')) icon = 'fa-tools';
+                    if (header.textContent.toLowerCase().includes('projects')) icon = 'fa-code';
+                    if (header.textContent.toLowerCase().includes('contact')) icon = 'fa-envelope';
+
+                    header.innerHTML = `<i class="fas ${icon} icon"></i>${header.innerHTML}`;
+                });
+
+                // Add icons to list items
+                const listItems = content.querySelectorAll('ul li');
+                listItems.forEach(item => {
+                    item.innerHTML = `<i class="fas fa-check icon"></i>${item.innerHTML}`;
+                });
+            });
+    </script>
 </body>
 </html>
